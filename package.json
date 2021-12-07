@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/deyibanh/alyra-defi4-uniswap-fork#readme",
   "dependencies": {
-    "@openzeppelin/contracts": "^4.4.0"
+    "@openzeppelin/contracts": "^4.4.0",
+    "@openzeppelin/test-helpers": "^0.5.15"
   }
 }
