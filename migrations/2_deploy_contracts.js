@@ -118,13 +118,13 @@ module.exports = async function (deployer, _network, accounts) {
     console.log("FUSDT/WETH Reserve 1: " + web3.utils.fromWei(swapPairFusdtWeth9Reserve1));
 
 
-
     // Swap ETH to FDAI.
-    console.log("***** Swap ETH to FDAI *****");
+    // console.log("***** Swap ETH to FDAI *****");
     // let amountOut = await swapRouter.contract.methods
     //     .getAmountOut(web3.utils.toWei("1"), swapPairFdaiWeth9Reserve0, swapPairFdaiWeth9Reserve1)
     //     .call();
     // console.log("AmountOut (FDAI):" + web3.utils.fromWei(amountOut));
+    
     // await swapRouter.swapETHForExactTokens(
     //     amountOut,
     //     [weth9.address, fdai.address],
@@ -133,18 +133,18 @@ module.exports = async function (deployer, _network, accounts) {
     //     { from: accounts[0], value: web3.utils.toWei("1") }
     // );
 
-    // await swapRouter.swapExactETHForTokens(
-    //     web3.utils.toWei('0.01', 'ether'),
-    //     [weth9.address, fdai.address],
-    //     accounts[0],
-    //     constants.MAX_UINT256,
-    //     { value: web3.utils.toWei('0.001', 'ether') }
-    // );
-    // console.log("=> ETH to FDAI swapped.");
+    await swapRouter.swapExactETHForTokens(
+        new BN(web3.utils.toWei('0.1', 'ether')),
+        [ weth9.address, fdai.address ],
+        accounts[0],
+        constants.MAX_UINT256,
+        { value: new BN(web3.utils.toWei('0.1', 'ether')) }
+    );
+    console.log("=> ETH to FDAI swapped.");
     
-    // swapPairFdaiWeth9Reserves = await swapPairFdaiWeth9.methods.getReserves().call();
-    // swapPairFdaiWeth9Reserve0 = swapPairFdaiWeth9Reserves._reserve0;
-    // swapPairFdaiWeth9Reserve1 = swapPairFdaiWeth9Reserves._reserve1;
-    // console.log("FDAI/WETH Reserve 0: " + web3.utils.fromWei(swapPairFdaiWeth9Reserve0));
-    // console.log("FDAI/WETH Reserve 1: " + web3.utils.fromWei(swapPairFdaiWeth9Reserve1));
+    swapPairFdaiWeth9Reserves = await swapPairFdaiWeth9Contract.methods.getReserves().call();
+    swapPairFdaiWeth9Reserve0 = swapPairFdaiWeth9Reserves._reserve0;
+    swapPairFdaiWeth9Reserve1 = swapPairFdaiWeth9Reserves._reserve1;
+    console.log("FDAI/WETH Reserve 0: " + web3.utils.fromWei(swapPairFdaiWeth9Reserve0));
+    console.log("FDAI/WETH Reserve 1: " + web3.utils.fromWei(swapPairFdaiWeth9Reserve1));
 };
